@@ -13,6 +13,7 @@ app.use(express.json());
 
 
 // Post API named /notes
+// Create data
 app.post("/notes", async(req, res) =>{
     const {userName, email } = req.body
 
@@ -22,8 +23,20 @@ app.post("/notes", async(req, res) =>{
 
     res.status(201).json({
         message : "Note created successfully",
-        note
     })
 })
+
+// Get API named /notes
+// Fetch all the notes data
+
+app.get("/notes", async(req, res) =>{
+    const notes = await noteModel.find()
+
+    res.status(200).json({
+        message: "Notes fetch successfully",
+        notes
+    })
+})
+
 
 module.exports = app
